@@ -1,23 +1,25 @@
 using System;
 using System.Collections.Generic;
+using BrandShack.Services;
 using Microsoft.AspNetCore.Mvc;
-using ShoeShack.Models;
-using ShoeShack.Services;
 
-namespace Shoeshack.Controllers
+using ShoeShack.Models;
+
+namespace Brandshack.Controllers
 {
   [ApiController]
-  [Route("api/[controller]")]
-  public class ShoesController : ControllerBase
+  [Route("/api/[controller]")]
+  public class BrandsController : ControllerBase
   {
-    private readonly ShoesService _ss;
-    public ShoesController(ShoesService ss)
+
+    private readonly BrandsService _ss;
+    public BrandsController(BrandsService ss)
     {
       _ss = ss;
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Shoe>> Get()
+    public ActionResult<IEnumerable<Brand>> Get()
     {
       try
       {
@@ -30,7 +32,7 @@ namespace Shoeshack.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Shoe> Get(string id)
+    public ActionResult<Brand> Get(int id)
     {
       try
       {
@@ -43,11 +45,11 @@ namespace Shoeshack.Controllers
     }
 
     [HttpPost]
-    public ActionResult<Shoe> Create([FromBody] Shoe newShoe)
+    public ActionResult<Brand> Create([FromBody] Brand newBrand)
     {
       try
       {
-        return Ok(_ss.Create(newShoe));
+        return Ok(_ss.Create(newBrand));
       }
       catch (Exception e)
       {
@@ -56,12 +58,12 @@ namespace Shoeshack.Controllers
     }
 
     [HttpPut("{id}")]
-    public ActionResult<Shoe> Edit([FromBody] Shoe newShoe, string id)
+    public ActionResult<Brand> Edit([FromBody] Brand newBrand, int id)
     {
       try
       {
-        newShoe.Id = id;
-        return Ok(_ss.Edit(newShoe));
+        newBrand.Id = id;
+        return Ok(_ss.Edit(newBrand));
       }
       catch (Exception e)
       {
@@ -70,7 +72,7 @@ namespace Shoeshack.Controllers
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<string> Delete(string id)
+    public ActionResult<string> Delete(int id)
     {
       try
       {

@@ -3,7 +3,7 @@ using ShoeShack.Interfaces;
 
 namespace ShoeShack.Models
 {
-  public class Shoe : IItem
+  public class Shoe : IShoe
   {
     public string Id { get; set; }
     [Required]
@@ -12,5 +12,6 @@ namespace ShoeShack.Models
     public string Color { get; set; }
     public decimal Size { get; set; }
     public decimal Price { get; set; }
+    public int BrandId { get; set; }
   }
 }
